@@ -1,3 +1,5 @@
+import { User } from './user.entity';
+
 export interface IUserData {
   userId: number;
   username: string;
@@ -9,3 +11,5 @@ export interface IUserRO {
 }
 
 export type UserDTO = any;
+
+export type UserDocument = User & Document;
