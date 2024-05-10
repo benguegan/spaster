@@ -7,22 +7,25 @@ services:
       context: .
       dockerfile: Dockerfile
       target: development
+    env_file: .env
     command: start:dev
     ports:
       - '3000:3000'
     networks:
       - back-tier
-    # volumes:
-    #   # frontend
-    #   - ./frontend:/opt/app/frontend/app:delegated
-    #   - ./frontend/package.json:/opt/app/frontend/package.json
-    #   - ./frontend/package-lock.json:/opt/app/frontend/package-lock.json
-    #   - notused:/opt/app/frontend/app/node_modules
-    #   # backend
-    #   - ./backend/:/opt/app/backend/app:delegated
-    #   - ./backend/package.json:/opt/app/backend/package.json
-    #   - ./backend/package-lock.json:/opt/app/backend/package-lock.json
-    #   - notused:/opt/app/backend/app/node_modules
+    volumes:
+      #   # frontend
+      #   - ./frontend:/opt/app/frontend/app:delegated
+      #   - ./frontend/package.json:/opt/app/frontend/package.json
+      #   - ./frontend/package-lock.json:/opt/app/frontend/package-lock.json
+      - ./frontend:/opt/app/frontend/
+      - ./frontend/nodes_modules:/opt/app/frontend/node_modules
+      #   # backend
+      #   - ./backend/:/opt/app/backend/app:delegated
+      #   - ./backend/package.json:/opt/app/backend/package.json
+      #   - ./backend/package-lock.json:/opt/app/backend/package-lock.json
+      - ./backend:/opt/backend/
+      - ./backend/nodes_modules:/opt/app/backend/node_modules
     restart: always
     depends_on:
       - mongodb
@@ -36,6 +39,7 @@ services:
       - ./backend/src/app/infra/data/db:/data/db
     ports:
       - '27017:27017'
+    env_file: .env
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongo
       MONGO_INITDB_ROOT_PASSWORD: mongo
