@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/Stream'),
+    MongooseModule.forRoot('mongodb://mongo:mongo@mongodb:27017/Stream'),
     MulterModule.register({
       storage: diskStorage({
         destination: './public',

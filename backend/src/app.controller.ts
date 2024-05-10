@@ -19,8 +19,9 @@ export class AppController {
     private jwtService: JwtService,
   ) {}
 
-  @Post('/signup')
+  @Post('/user/signup')
   async signup(@Res() response, @Body() user: User) {
+    console.log('here');
     const newUser = await this.userService.signup(user);
     return response.status(HttpStatus.CREATED).json({ newUser });
   }

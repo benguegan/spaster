@@ -18,11 +18,11 @@ import { isAuthenticated } from './app.middleware';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'frontend'),
+      rootPath: join(__dirname, '../../frontend/build'),
     }),
     AuthModule,
     UsersModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/Stream'),
+    MongooseModule.forRoot('mongodb://mongo:mongo@mongodb:27017/Stream'),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     MongooseModule.forFeature([{ name: Video.name, schema: VideoSchema }]),
     JwtModule.register({
